@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-US" translate="no">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-US" />
+  <title th:text="'Index: ' + ${path}"></title>
+  <link type="text/css" rel="stylesheet" href="/style.css" />
+  <meta name="google" content="notranslate" />
+</head>
+
+<body lang="en-US" translate="no">
+  <h3 th:text="'Index: ' + ${path}"></h3>
+  <p>
+    <a th:if="${parent} != null" th:href="@{/?path={path}(path=${parent})}">Go to parent</a>
+    <a th:if="${parent} == null" th:href="@{/}">Go to &lt;root&gt;</a>
+  </p>
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Size (%)</th>
+      <th>Modified</th>
+    </tr>
+    <tr th:if="${list.size()} == 0">
+      <td></td>
+      <td>No files found.</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr th:each="f : ${list}">
+      <td>
+        <span th:text="${f.fileType()}"></span>
+      </td>
+      <td>
+        <a th:if="${f.fileType()} == 'D'" th:href="@{/?path={path}(path=${f.path()})}" th:text=${f.name()}></a>
+        <span th:if="${f.fileType()} != 'D'" th:text="${f.name()}"></span>
+      </td>
+      <td th:text="${f.size()}">
+      </td>
+      <td>
+        <div th:style="'width: '+ ${f.percentSize()} + 'px;'"></div>
+      </td>
+      <td th:text="${f.timestamp()}">
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 50px">
+    <a th:href="@{/cache/reload?path={path}(path=${path})}">Reload Cache</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+body {
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+
+table {
+	border-collapse: collapse;
+	border-top: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+}
+
+th {
+	text-align: left;
+}
+
+th,td {
+	padding: 3px 6px;
+	border-left: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+
+td:nth-child(3) {
+	text-align: right;
+}
+
+td:nth-child(4) {
+	padding: 0;
+	width: 100px;
+}
+
+td:nth-child(4)>div {
+	background-color: #f50;
+	height: 15px;
+}
+
+a[data-url] {
+	cursor: pointer;
+	color: blue;
+}
