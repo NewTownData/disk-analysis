@@ -14,12 +14,9 @@
 package com.newtowndata.disk.rest;
 
 import com.newtowndata.disk.service.CacheService;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/cache")
@@ -32,13 +29,9 @@ public class CacheResource {
 	}
 
 	@GetMapping("/reload")
-	public String reload(@RequestParam(required = false) String path) {
+	public String reload() {
 		cacheService.reload();
-		if (path == null) {
-			return "redirect:/";
-		} else {
-			return "redirect:/?path=" + URLEncoder.encode(path, StandardCharsets.UTF_8);
-		}
+		return "redirect:/";
 	}
 
 }
